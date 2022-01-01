@@ -1,0 +1,159 @@
+<div data-name="login" class="page no-navbar no-toolbar no-swipeback">
+    <div class="page-content login-screen-content" style="background-color:#1e2e61;">
+        <div class="login-screen-title" style="color:#fff;margin-top:50%;">Kronika</div>
+        <div class="block block-strong inset" style="margin:0 40PX;border-radius:10px;background-color:#f8f8f8;">
+            <form>
+                <div class="list">
+                    <ul>
+                        <li class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Username</div>
+                                <div class="item-input">
+                                    <input type="text" autofocus="" name="username" id="username" placeholder="Username"
+                                        required>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Sandi</div>
+                                <div class="item-input">
+                                    <input type="password" name="password" id="password" placeholder="Sandi" required>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="list">
+                    <ul>
+                        <li><a href="#" class="button button-fill" style="width:50%;margin:0 auto;"
+                                id="btnsignin">Masuk</a></li>
+                        <li><a href="#" data-popup=".popup-signup" class="button popup-open"
+                                style="width:50%;margin:0 auto;text-transform:none;font-weight:normal;margin-top:10px;">Buat
+                                akun</a></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="popup popup-signup">
+            <div class="block">
+                <h2 style="margin-left:20px;color:#1e2e61;font-size:200%;margin-bottom:-25px;">Mendaftar</h2>
+                <form>
+                    <div class="list">
+                        <ul>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Full Name</div>
+                                    <div class="item-input">
+                                        <input type="text" autofocus="" name="newfullname" id="newfullname"
+                                            placeholder="Full name" required>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Username</div>
+                                    <div class="item-input">
+                                        <input type="text" autofocus="" name="newusername" id="newusername"
+                                            placeholder="Username" required>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Sandi</div>
+                                    <div class="item-input">
+                                        <input type="password" name="newpassword" id="newpassword" placeholder="Sandi"
+                                            required>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Ulangi Sandi</div>
+                                    <div class="item-input">
+                                        <input type="password" name="newpassword2" id="newpassword2"
+                                            placeholder="Ulangi sandi" required>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <a href="#" class="button button-fill"
+                        style="width:50%;margin:0 auto;text-transform:none;font-weight:normal;margin-top:10px;"
+                        id="btnsignup">Buat akun</a></li>
+                    <br>
+                    <a href="#" class="link popup-close" id='batal' style="margin:0 45%;">Batal</a>
+
+            </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<script>
+    export default (props, { $f7, $, $on }) => {
+        $on('pageInit', () => {
+            // DOM events for About popup
+            $('.popup-about').on('popup:open', function (e) {
+                console.log('About popup open');
+            });
+            $('.popup-about').on('popup:opened', function (e) {
+                console.log('About popup opened');
+            });
+
+            // Create dynamic Popup
+            var dynamicPopup = $f7.popup.create({
+                content: `
+            <div class="popup">
+              <div class="block">
+                <p>Popup created dynamically.</p>
+                <p><a href="#" class="link popup-close">Close me</a></p>
+              </div>
+            </div>
+          `,
+                // Events
+                on: {
+                    open: function (popup) {
+                        console.log('Popup open');
+                    },
+                    opened: function (popup) {
+                        console.log('Popup opened');
+                    },
+                }
+            });
+            // Events also can be assigned on instance later
+            dynamicPopup.on('close', function (popup) {
+                console.log('Popup close');
+            });
+            dynamicPopup.on('closed', function (popup) {
+                console.log('Popup closed');
+            });
+
+            // Open dynamic popup
+            $('.dynamic-popup').on('click', function () {
+                dynamicPopup.open();
+            });
+
+            // Create Popup with swipe to close
+            var swipeToClosePopup = $f7.popup.create({
+                el: '.popup-swipe-to-close',
+                swipeToClose: true,
+            });
+
+            // Create Popup with swipe to close handler
+            var swipeToClosePopup = $f7.popup.create({
+                el: '.popup-swipe-to-close-handler',
+                swipeToClose: true,
+                swipeHandler: '.my-swipe-to-close-handler',
+            });
+        })
+
+        return $render;
+    }
+</script>
